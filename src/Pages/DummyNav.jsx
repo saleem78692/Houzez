@@ -63,7 +63,7 @@ const menuData = {
   },
 };
 
-function Navbar() {
+function DummyNav() {
   const [openMenu, setOpenMenu] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mobileAccordion, setMobileAccordion] = useState(null);
@@ -93,14 +93,8 @@ function Navbar() {
   };
 
   return (
-    <div
-      className="bg-cover bg-center bg-no-repeat min-h-screen"
-      style={{
-        backgroundImage:
-          "url('https://demo39.houzez.co/wp-content/uploads/2024/08/AdobeStock_866670033-scaled.jpg')", backgroundAttachment:'fixed'
-      }}
-    >
-      <div className="bg-black/50 min-h-screen w-full">
+    <div>
+      <div style={{backgroundColor:"rgb(30, 48, 68)"}}>
         {/* ── SIDEBAR OVERLAY (mobile/tablet) ── */}
         {sidebarOpen && (
           <div
@@ -661,116 +655,10 @@ function Navbar() {
             </NavLink>
           </div>
         </nav>
-
-        {/* ── HERO ── */}
-        <div
-          className="flex flex-col justify-center items-center text-white text-center px-5"
-          style={{ minHeight: "calc(100vh - 68px)" }}
-        >
-          <p
-            className="flex items-center gap-3 mb-4"
-            style={{
-              fontSize: 11,
-              letterSpacing: "3px",
-              textTransform: "uppercase",
-              color: "#38bdf8",
-              fontWeight: 600,
-            }}
-          >
-            <span
-              style={{
-                width: 28,
-                height: 1,
-                background: "#38bdf8",
-                opacity: 0.5,
-                display: "inline-block",
-              }}
-            />
-            Premium Real Estate
-            <span
-              style={{
-                width: 28,
-                height: 1,
-                background: "#38bdf8",
-                opacity: 0.5,
-                display: "inline-block",
-              }}
-            />
-          </p>
-
-          <h1
-            style={{
-              fontFamily: "'Georgia', serif",
-              fontSize: "clamp(30px, 6vw, 64px)",
-              lineHeight: 1.15,
-              letterSpacing: 1,
-              fontWeight: 700,
-              margin: "0 0 20px",
-            }}
-          >
-            Welcome To <span style={{ color: "#38bdf8" }}>Houzez</span>
-          </h1>
-
-          <p
-            style={{
-              color: "rgba(255,255,255,0.65)",
-              fontSize: "clamp(14px, 2vw, 17px)",
-              maxWidth: 540,
-              lineHeight: 1.75,
-              margin: 0,
-            }}
-          >
-            Houzez is an innovative real estate platform that helps ensure your
-            website's success in this super-competitive market.
-          </p>
-
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: 12,
-              marginTop: 32,
-            }}
-          >
-            <NavLink
-              to="/properties"
-              style={{
-                background: "#0ea5e9",
-                color: "#fff",
-                fontSize: 13,
-                fontWeight: 700,
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-                padding: "12px 28px",
-                borderRadius: 7,
-                textDecoration: "none",
-              }}
-            >
-              Browse Properties
-            </NavLink>
-            <NavLink
-              to="/create-listing"
-              style={{
-                color: "#fff",
-                fontSize: 13,
-                fontWeight: 600,
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-                padding: "12px 28px",
-                borderRadius: 7,
-                textDecoration: "none",
-                border: "0.5px solid rgba(255,255,255,0.35)",
-              }}
-            >
-              List Your Property
-            </NavLink>
-          </div>
-        </div>
       </div>
       <Outlet />
     </div>
   );
 }
 
-export default Navbar;
+export default DummyNav;
