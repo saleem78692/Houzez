@@ -13,7 +13,7 @@ const menuData = {
       { to: "/home-image-banner", label: "With Image Banner" },
       { to: "/home-property-slider", label: "With Properties Slider" },
       { to: "/home-revolution-slider", label: "With Revolution Slider" },
-      { to: "/home-video", label: "With Video" },
+      { to: "/home-with-video", label: "With Video" },
       { to: "/home-advanced-search", label: "Overlay Advanced Search" },
     ],
   },
