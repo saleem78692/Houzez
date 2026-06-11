@@ -1,0 +1,259 @@
+import React, { useState } from "react";
+import {
+  BedDouble,
+  Bath,
+  Car,
+  Ruler,
+  MapPin,
+  Heart,
+  Expand,
+  Plus,
+  Paperclip,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight
+} from "lucide-react";
+import { Link } from "react-router";
+
+const PropertyList = ({ properties }) => {
+  const [currentPage, setCurrentPage] = useState(2); // Default to page 2 like in the screenshot
+  const propertiesPerPage = 2; // Show 2 properties per page as in the screenshot
+
+  // Calculate pagination values
+  const indexOfLastProperty = currentPage * propertiesPerPage;
+  const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
+  const currentProperties = properties.slice(
+    indexOfFirstProperty,
+    indexOfLastProperty
+  );
+  const totalPages = Math.ceil(properties.length / propertiesPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  // Generate page numbers to display
+  const getPageNumbers = () => {
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(i);
+    }
+    return pages;
+  };
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Property Cards List */}
+      <div className="space-y-6">
+        {currentProperties.map((property) => (
+          <div
+            key={property.id}
+            className="flex flex-col lg:flex-row bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 w-full"
+          >
+            {/* Left Column: Image with overlays */}
+            <div className="relative w-full lg:w-[400px] h-[250px] sm:h-[300px] lg:h-[240px] flex-shrink-0 group overflow-hidden">
+              <img
+                src={property.image}
+                alt={property.title}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              
+              {/* Featured Badge */}
+              {property.isFeatured && (
+                <div className="absolute top-4 left-4 bg-[#69c017] text-white text-[10px] font-bold px-2.5 py-1 rounded tracking-wider uppercase">
+                  Featured
+                </div>
+              )}
+
+              {/* Slider Next/Prev Arrows on hover */}
+              <button className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <ChevronLeft size={20} />
+              </button>
+              <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <ChevronRight size={20} />
+              </button>
+
+              {/* Action Icons Overlay at bottom-right */}
+              <div className="absolute bottom-4 right-4 flex items-center gap-1.5">
+                <button 
+                  title="Expand"
+                  className="bg-black/50 hover:bg-black/80 text-white p-2 rounded transition-colors duration-250 cursor-pointer"
+                >
+                  <Expand size={15} />
+                </button>
+                <button 
+                  title="Add to Favorites"
+                  className="bg-black/50 hover:bg-black/80 text-white p-2 rounded transition-colors duration-250 cursor-pointer"
+                >
+                  <Heart size={15} />
+                </button>
+                <button 
+                  title="Compare"
+                  className="bg-black/50 hover:bg-black/80 text-white p-2 rounded transition-colors duration-250 cursor-pointer"
+                >
+                  <Plus size={15} />
+                </button>
+              </div>
+            </div>
+
+            {/* Right Column: Property Information */}
+            <div className="flex-grow p-5 sm:p-6 flex flex-col md:flex-row justify-between gap-6">
+              {/* Main Content Details */}
+              <div className="flex flex-col justify-between flex-grow">
+                <div>
+                  {/* Badges row: Status & Hot Offer */}
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="bg-[#434a54] text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase">
+                      {property.status}
+                    </span>
+                    {property.isHot && (
+                      <span className="bg-[#e94b3c] text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase">
+                        Hot Offer
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-slate-800 hover:text-blue-600 transition-colors duration-200">
+                    <Link to={`/property/${property.id}`}>{property.title}</Link>
+                  </h3>
+
+                  {/* Address */}
+                  <div className="flex items-center gap-1 text-gray-400 mt-2 text-sm">
+                    <MapPin size={15} className="text-gray-400 flex-shrink-0" />
+                    <span className="truncate">{property.address}</span>
+                  </div>
+
+                  {/* Specs / Features Row */}
+                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-4 text-slate-600 text-sm">
+                    <div className="flex items-center gap-1.5">
+                      <BedDouble size={18} className="text-slate-400" />
+                      <span className="font-semibold text-slate-700">{property.beds}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Bath size={18} className="text-slate-400" />
+                      <span className="font-semibold text-slate-700">{property.baths}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Car size={18} className="text-slate-400" />
+                      <span className="font-semibold text-slate-700">{property.cars}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Ruler size={18} className="text-slate-400" />
+                      <span className="font-semibold text-slate-700">{property.area}</span>
+                    </div>
+                  </div>
+
+                  {/* Property Type Badge */}
+                  <div className="mt-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                    {property.type}
+                  </div>
+                </div>
+
+                {/* Agent Profile & Date Section */}
+                <div className="border-t border-gray-100 pt-4 mt-4 flex items-center justify-between lg:justify-start lg:gap-8">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={property.agent.avatar}
+                      alt={property.agent.name}
+                      className="w-8 h-8 rounded-full object-cover ring-2 ring-gray-100"
+                    />
+                    <span className="text-sm font-medium text-gray-600 hover:text-blue-600 cursor-pointer">
+                      {property.agent.name}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-gray-400 text-xs">
+                    <Paperclip size={14} />
+                    <span>{property.agent.addedTime}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Price & Action Button Column */}
+              <div className="flex flex-row md:flex-col justify-between md:justify-between items-end md:items-end w-full md:w-auto md:min-w-[150px] border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-6">
+                <div className="text-right">
+                  <div className="text-2xl font-extrabold text-slate-800">
+                    {property.price}
+                  </div>
+                  <div className="text-xs text-gray-400 font-semibold mt-0.5">
+                    {property.sqFtPrice}
+                  </div>
+                </div>
+
+                <Link
+                  to={`/property/${property.id}`}
+                  className="bg-[#00aeff] hover:bg-[#009ee6] text-white font-bold text-sm px-5 py-2.5 rounded transition-all duration-200 shadow-sm hover:shadow active:scale-95"
+                >
+                  Details
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center items-center gap-1.5 mt-12 mb-6 select-none">
+        {/* Previous page arrow */}
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={`w-10 h-10 flex items-center justify-center rounded border text-sm transition-all duration-200 ${
+            currentPage === 1
+              ? "text-gray-300 border-gray-100 cursor-not-allowed"
+              : "text-gray-500 border-gray-200 hover:bg-gray-50 hover:border-gray-300 cursor-pointer"
+          }`}
+        >
+          <ChevronLeft size={16} />
+        </button>
+
+        {/* Page numbers */}
+        {getPageNumbers().map((pageNumber) => (
+          <button
+            key={pageNumber}
+            onClick={() => handlePageChange(pageNumber)}
+            className={`w-10 h-10 flex items-center justify-center rounded border text-sm font-semibold transition-all duration-200 cursor-pointer ${
+              currentPage === pageNumber
+                ? "bg-[#00aeff] border-[#00aeff] text-white shadow-sm"
+                : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300"
+            }`}
+          >
+            {pageNumber}
+          </button>
+        ))}
+
+        {/* Next page arrow */}
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className={`w-10 h-10 flex items-center justify-center rounded border text-sm transition-all duration-200 ${
+            currentPage === totalPages
+              ? "text-gray-300 border-gray-100 cursor-not-allowed"
+              : "text-gray-500 border-gray-200 hover:bg-gray-50 hover:border-gray-300 cursor-pointer"
+          }`}
+        >
+          <ChevronRight size={16} />
+        </button>
+
+        {/* Fast-forward double-arrow */}
+        <button
+          onClick={() => handlePageChange(totalPages)}
+          disabled={currentPage === totalPages}
+          className={`w-10 h-10 flex items-center justify-center rounded border text-sm transition-all duration-200 ${
+            currentPage === totalPages
+              ? "text-gray-300 border-gray-100 cursor-not-allowed"
+              : "text-gray-500 border-gray-200 hover:bg-gray-50 hover:border-gray-300 cursor-pointer"
+          }`}
+        >
+          <ChevronsRight size={16} />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default PropertyList;

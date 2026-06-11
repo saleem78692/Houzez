@@ -33,7 +33,7 @@ const menuData = {
     label: "PROPERTY",
     header: "Listing Pages",
     links: [
-      { to: "/", label: "Detail Page" },
+      { to: "/all-properties", label: "Detail Page" },
       { to: "/floor-plans", label: "Floor Plans" },
       { to: "/virtual-tour", label: "Virtual Tour" },
       { to: "/mortgage", label: "Mortgage Calc" },
@@ -44,7 +44,7 @@ const menuData = {
     label: "REALTOR",
     header: "Agents & Agencies",
     links: [
-      { to: "/", label: "Our Agents" },
+      { to: "/our-agents", label: "Our Agents" },
       { to: "/agent-profile", label: "Agent Profile" },
       { to: "/agencies", label: "Agencies" },
       { to: "/top-realtors", label: "Top Realtors" },
