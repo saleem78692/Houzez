@@ -57,7 +57,7 @@ function KeywordSearch({ onSearch }) {
   };
 
   return (
-    <div className="sticky top-0 z-50 w-full bg-slate-950/80 backdrop-blur-md border-b border-slate-800 shadow-xl transition-all duration-300">
+    <div className="hidden md:block sticky top-0 z-50 w-full bg-slate-950/80 backdrop-blur-md border-b border-slate-800 shadow-xl transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
         <form
           onSubmit={handleSubmit}

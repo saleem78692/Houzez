@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper/modules";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import BlockIcon from "@rsuite/icons/Block";
 import {
   BedDouble,
@@ -117,7 +117,11 @@ function Slider() {
           spaceBetween={20}
           pagination={{ clickable: true }}
           navigation={true}
-          modules={[Pagination, Navigation]}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          modules={[Pagination, Navigation, Autoplay]}
           breakpoints={{
             0: {
               slidesPerView: 1,

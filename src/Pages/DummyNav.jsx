@@ -63,7 +63,7 @@ const menuData = {
   },
 };
 
-function DummyNav() {
+function Navbar() {
   const [openMenu, setOpenMenu] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mobileAccordion, setMobileAccordion] = useState(null);
@@ -93,8 +93,15 @@ function DummyNav() {
   };
 
   return (
-    <div>
-      <div style={{backgroundColor:"rgb(30, 48, 68)"}}>
+    <div
+      className="bg-cover bg-center bg-no-repeat min-h-screen"
+      style={{
+        backgroundImage:
+          "url('https://demo39.houzez.co/wp-content/uploads/2024/08/AdobeStock_866670033-scaled.jpg')",
+        backgroundAttachment: "fixed",
+      }}
+    >
+      <div className="bg-black/50  w-full">
         {/* ── SIDEBAR OVERLAY (mobile/tablet) ── */}
         {sidebarOpen && (
           <div
@@ -655,10 +662,12 @@ function DummyNav() {
             </NavLink>
           </div>
         </nav>
+
+       
       </div>
       <Outlet />
     </div>
   );
 }
 
-export default DummyNav;
+export default Navbar;

@@ -734,7 +734,7 @@ function Navbar() {
             }}
           >
             <NavLink
-              to="/properties"
+              to="/all-properties"
               style={{
                 background: "#0ea5e9",
                 color: "#fff",

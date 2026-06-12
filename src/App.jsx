@@ -33,6 +33,13 @@ import FAQ from "./Pages/FAQ";
 import TermsPrivacy from "./Pages/TermsPrivacy";
 import Login from "./Pages/Login";
 import CreateListing from "./Pages/CreateListing";
+import ApartmentDetails from "./Pages/ApartmentDetails";
+import StudioDetails from "./Pages/StudioDetails";
+import OfficeDetails from "./Pages/OfficeDetails";
+import SingleFamilyDetails from "./Pages/SingleFamilyDetails";
+import VillaDetails from "./Pages/VillaDetails";
+import ShopDetails from "./Pages/ShopDetails";
+import CityProperties from "./Pages/CityProperties";
 
 function App() {
   return (
@@ -62,6 +69,7 @@ function App() {
         <Route path="/contact-agent" element={<ContactAgent/>}/>
         <Route path="/our-agents" element={<OurAgents/>}/>
         <Route path="/agent-profile" element={<AgentProfile/>}/>
+        <Route path="/agent/:name" element={<AgentProfile/>}/>
         <Route path="/agencies" element={<Agencies/>}/>
         <Route path="/top-realtors" element={<TopRealtors/>}/>
         <Route path="/about" element={<AboutUs/>}/>
@@ -72,6 +80,13 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/create-listing" element={<CreateListing/>}/>
         <Route path="/property/:id" element={<PropertyDetail/>}/>
+        <Route path="/apartmentdetails" element={<ApartmentDetails />} />
+        <Route path="/studiodetails" element={<StudioDetails />} />
+        <Route path="/officedetails" element={<OfficeDetails />} />
+        <Route path="/singleFamilyDetails" element={<SingleFamilyDetails />} />
+        <Route path="/villadetails" element={<VillaDetails />} />
+        <Route path="/shopdetails" element={<ShopDetails />} />
+        <Route path="/property" element={<CityProperties />} />
       </Route>
 
       <Route path="*" element={<ErrorPage/>} />

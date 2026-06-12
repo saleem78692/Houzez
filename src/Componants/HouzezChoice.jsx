@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Loader2 } from 'lucide-react';
 
 function HouzezChoice() {
+  const [isSearching,setIsSearching]=useState(false)
+
+  const IsSearch=(e)=>{
+   e.preventDefault();
+   setIsSearching(true)
+   setTimeout(()=>{
+    setIsSearching(false)
+   },2000)
+  }
   return (
     <>
-     <section className="relative py-20 bg-cover bg-center bg-fixed mt-24" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')" }}>
+     <section className="relative py-20 bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')" }}>
         <div className="absolute inset-0 bg-[#163a5a]/90"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center">
@@ -120,8 +130,15 @@ function HouzezChoice() {
                   </div>
 
                   <div className="pt-2">
-                    <button type="submit" className="w-full text-white bg-[#00aeff] hover:bg-[#009de6] focus:ring-4 focus:outline-none focus:ring-sky-300 font-semibold rounded-md text-[13px] px-5 py-3 text-center transition-colors">
-                      Submit
+                    <button type="submit" onClick={IsSearch} disabled={isSearching} className="w-full flex items-center justify-center text-white bg-[#00aeff] hover:bg-[#009de6] focus:ring-4 focus:outline-none focus:ring-sky-300 font-semibold rounded-md text-[13px] px-5 py-3 text-center transition-colors">
+                      {isSearching ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Searching...
+                        </>
+                      ) : (
+                        <>Submit</>
+                      )}
                     </button>
                   </div>
                 </form>
